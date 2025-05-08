@@ -1,0 +1,229 @@
+/* Basic reset and global styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #2d2d2d;
+    color: #fff;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: 'MinecraftFont';
+    src: url('fonts/Minecraft.ttf') format('truetype');
+}
+
+.container { display: flex; gap: 20px; width: 100%; max-width: 1200px; }
+.panel { background-color: #555555; padding: 15px; border-radius: 8px; border: 1px solid #3e3e3e; }
+.settings-panel { flex: 1; min-width: 200px; }
+.settings-panel h2, .personal-best-panel h2 { margin-top: 0; border-bottom: 1px solid #3e3e3e; padding-bottom: 10px; font-size: 1.1em; }
+.setting-item { margin-bottom: 15px; }
+.setting-item h3 { margin-top: 10px; margin-bottom: 10px; font-size: 1em; }
+.setting-item.ping-setting { display: flex; align-items: center; gap: 10px; }
+.setting-item.ping-setting label { margin-bottom: 0; }
+.setting-item.ping-setting input[type="number"] { width: 60px; padding: 5px; background-color: #333; color: #fff; border: 1px solid #777; border-radius: 3px; }
+.style-option { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; padding: 3px 0; }
+.style-option span:first-child { flex-grow: 1; }
+.style-checkbox-label input[type="radio"] { display: none; }
+.custom-radio { display: inline-block; width: 18px; height: 18px; background-color: #222; border: 1px solid #888; border-radius: 3px; cursor: pointer; margin-left: 10px; }
+body.custom-odin-style .style-option input[value="custom-odin"]:checked + .custom-radio,
+body.odin-style .style-option input[value="odin"]:checked + .custom-radio,
+body.skytils-style .style-option input[value="skytils"]:checked + .custom-radio,
+body.vanilla-style .style-option input[value="vanilla"]:checked + .custom-radio {
+    background-color: #60ecfc; border-color: #60ecfc;
+}
+
+.game-area { flex: 2; display: flex; flex-direction: column; align-items: center; min-width: 380px; }
+.game-title { font-size: 24px; margin-bottom: 20px; font-weight: normal; }
+
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(7, auto);
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    min-height: 100px;
+    box-sizing: border-box;
+    justify-content: center;
+    gap: 4px;
+}
+
+/* Default .number-box state */
+.number-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    font-weight: bold;
+    height: 50px;
+    width: 50px;
+    border-radius: 4px;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.2s, color 0.2s, opacity 0.3s, border-color 0.2s, background-image 0.2s;
+    color: #fff; /* Default text color */
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    box-sizing: border-box;
+    border: 1px solid transparent;
+    position: relative;
+    background-color: transparent; /* Important base for texture styles */
+    background-image: none;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.number-box.deactivated { pointer-events: none; }
+.number-box .number-text { z-index: 1; /* Ensure text is above image */ }
+
+.game-timer-display { font-size: 2em; font-weight: bold; margin-bottom: 20px; min-height: 36px; display: none; }
+button { padding: 10px 15px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; font-size: 0.9em; }
+button:hover { opacity: 0.85; }
+#reset-game { background-color: #ccc; color: #000; } /* Default reset game button */
+
+.personal-best-panel { flex: 1; min-width: 200px; }
+#best-times-list { list-style-type: none; padding: 0; margin-bottom: 15px; }
+#best-times-list li { padding: 6px 0; border-bottom: 1px dashed #777; font-size: 0.95em; }
+#best-times-list li:last-child { border-bottom: none; }
+/* Universal Red Reset Scores Button - Retained from previous */
+#reset-scores {
+    background-color: #E53935 !important;
+    color: #fff !important;
+}
+
+/* --- STYLES --- */
+
+/* == Vanilla Style - Retained from previous (texture focus) == */
+body.vanilla-style .game-board {
+    background-color: #3a3a3a;
+    gap: 4px;
+}
+body.vanilla-style .number-box {
+    width: 54px;
+    height: 54px;
+    font-family: 'MinecraftFont', monospace;
+    color: #fff;
+    text-shadow: 1px 1px #333;
+    border-radius: 0;
+    border: none;
+    background-image: url('textures/minigames/red_steined_glass.png') !important;
+    background-color: transparent !important;
+}
+body.vanilla-style .number-box .number-text {
+    position: absolute;
+    bottom: 5px;
+    right: 7px;
+    font-size: 1em;
+}
+body.vanilla-style .number-box.deactivated {
+    background-image: url('textures/minigames/green_steined_glass.png') !important;
+    background-color: transparent !important;
+}
+body.vanilla-style #reset-game { background-color: #556B2F; color: white; }
+
+/* == Custom Style - Reverted & Modified == */
+body.custom-odin-style .game-board { background-color: #000; border: 3px solid #017878; gap: 4px; }
+body.custom-odin-style .number-box {
+    /* From reverted state: */
+    background-color: transparent; /* Initially transparent before highlight */
+    border: 1px solid transparent; /* No visible border before highlight */
+    color: #fff; /* Default text color before graying out */
+    width: 50px; height: 50px; border-radius: 4px;
+    background-image: none; /* Ensure no accidental texture */
+}
+/* New: Grayed out text for numbers not current, second, or third */
+body.custom-odin-style .number-box:not(.current-to-click):not(.second-to-click):not(.third-to-click):not(.deactivated) .number-text {
+    color: #555; /* Dim color for non-highlighted, active numbers */
+}
+body.custom-odin-style .number-box.current-to-click { background-color: #017878; border-color: #017878; }
+body.custom-odin-style .number-box.current-to-click .number-text { color: #fff; } /* Ensure text is bright white when highlighted */
+body.custom-odin-style .number-box.second-to-click { background-color: #023334; border-color: #023334; }
+body.custom-odin-style .number-box.second-to-click .number-text { color: #fff; }
+body.custom-odin-style .number-box.third-to-click { background-color: #021F1F; border-color: #021F1F; }
+body.custom-odin-style .number-box.third-to-click .number-text { color: #fff; }
+body.custom-odin-style .number-box.deactivated { background-color: #000000; border-color: #000000; } /* Text removed by JS */
+body.custom-odin-style #reset-game { background-color: #60ecfc; color: #000; }
+
+
+/* == Odin Style - Reverted == */
+body.odin-style .game-board { background-color: #000000; border: 2px solid #333; gap: 4px; }
+body.odin-style .number-box {
+    /* From reverted state: */
+    background-color: #000000; /* Numbers match board until highlighted */
+    border: 1px solid #000000;
+    color: #fff; /* Default for highlighted, other rules make it dimmer initially */
+    width: 50px; height: 50px; border-radius: 0; /* Square */
+    background-image: none; /* Ensure no accidental texture */
+}
+/* Text is less visible on dark background until box is highlighted */
+body.odin-style .number-box:not(.current-to-click):not(.second-to-click):not(.third-to-click):not(.deactivated) .number-text {
+    color: #555; /* Or even closer to black if they should be very hidden, e.g. #222 */
+}
+body.odin-style .number-box.current-to-click { background-color: #017878; border-color: #017878; }
+body.odin-style .number-box.current-to-click .number-text { color: #fff; } /* Bright text on highlight */
+body.odin-style .number-box.second-to-click { background-color: #023334; border-color: #023334; }
+body.odin-style .number-box.second-to-click .number-text { color: #fff; }
+body.odin-style .number-box.third-to-click { background-color: #021F1F; border-color: #021F1F; }
+body.odin-style .number-box.third-to-click .number-text { color: #fff; }
+body.odin-style .number-box.deactivated { background-color: #000000; border-color: #000000; } /* Text removed by JS */
+body.odin-style #reset-game { background-color: #017878; color: #fff; }
+
+
+/* == Skytils Style - Retained from previous (texture focus) == */
+body.skytils-style .game-board {
+    background-color: #1E1E1E;
+    gap: 4px;
+}
+body.skytils-style .number-box {
+    width: 54px;
+    height: 54px;
+    font-family: 'MinecraftFont', monospace;
+    color: #FFF;
+    text-shadow: 1px 1px #333;
+    border-radius: 0;
+    border: none;
+    background-image: url('textures/minigames/red_steined_glass.png') !important;
+    background-color: transparent !important;
+}
+/* Highlighting for skytils REMOVES texture and uses solid color */
+body.skytils-style .number-box.current-to-click {
+    background-image: none !important;
+    background-color: #118888 !important;
+}
+body.skytils-style .number-box.second-to-click {
+    background-image: none !important;
+    background-color: #1C4E4E !important;
+}
+body.skytils-style .number-box.third-to-click {
+    background-image: none !important;
+    background-color: #1F3C3C !important;
+}
+body.skytils-style .number-box.deactivated {
+    background-image: url('textures/minigames/green_steined_glass.png') !important;
+    background-color: transparent !important;
+}
+body.skytils-style #reset-game { background-color: #118888; color: #fff; }
+
+/* Responsive Design - Retained from previous */
+@media (max-width: 768px) {
+    .container { flex-direction: column; align-items: center; }
+    .settings-panel, .personal-best-panel, .game-area { width: 100%; max-width: 450px; margin-bottom: 20px; }
+    .game-area { order: -1; }
+    .game-board { grid-template-columns: repeat(auto-fit, minmax(45px, 1fr)); }
+    body.vanilla-style .game-board, body.skytils-style .game-board {
+         grid-template-columns: repeat(auto-fit, 54px);
+         justify-content: center;
+    }
+    .number-box {
+        height: 40px; width: 40px;
+        font-size: 16px;
+    }
+    body.vanilla-style .number-box, body.skytils-style .number-box {
+        width: 54px;
+        height: 54px;
+    }
+    body.vanilla-style .number-box .number-text { font-size: 0.9em; bottom: 4px; right: 5px; }
+}

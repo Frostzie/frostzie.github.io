@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Click in Order Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <aside class="panel settings-panel">
+            <h2>Settings</h2>
+            <div class="setting-item ping-setting">
+                <label for="ping">Ping:</label>
+                <input type="number" id="ping" value="0" min="0">
+            </div>
+            <div class="setting-item">
+                <h3>Styles</h3>
+                <div class="style-option">
+                    <span>Vanilla</span>
+                    <label class="style-checkbox-label"><input type="radio" name="style" value="vanilla" data-style="vanilla-style"> <span class="custom-radio"></span></label>
+                </div>
+                <div class="style-option">
+                    <span>Skytils</span>
+                    <label class="style-checkbox-label"><input type="radio" name="style" value="skytils" data-style="skytils-style"> <span class="custom-radio"></span></label>
+                </div>
+                <div class="style-option">
+                    <span>Odin</span>
+                    <label class="style-checkbox-label"><input type="radio" name="style" value="odin" data-style="odin-style"> <span class="custom-radio"></span></label>
+                </div>
+                <div class="style-option">
+                    <span>Custom</span>
+                    <label class="style-checkbox-label"><input type="radio" name="style" value="custom-odin" data-style="custom-odin-style" checked> <span class="custom-radio"></span></label>
+                </div>
+            </div>
+        </aside>
+
+        <main class="game-area">
+            <h1 class="game-title">Click in order</h1>
+            <div class="game-board">
+                <!-- Numbers will be injected here by JS -->
+            </div>
+            <div class="game-timer-display"></div>
+            <button id="reset-game">Reset</button>
+        </main>
+
+        <aside class="panel personal-best-panel">
+            <h2>Person Best</h2>
+            <ul id="best-times-list">
+                <!-- Best times will be listed here -->
+            </ul>
+            <button id="reset-scores">Reset Scores</button>
+        </aside>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
