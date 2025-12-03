@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SkyFall</title>
+    <title>Frostzie</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -12,6 +12,7 @@
             margin: 0;
             padding: 0;
             transition: background-color 0.3s, color 0.3s;
+            padding-bottom: 60px; /* Add padding to prevent footer overlap if button is very low */
         }
         header {
             display: flex;
@@ -58,26 +59,46 @@
             transition: background-color 0.3s;
         }
         .button:hover {
-        background-color: #4752C4;
+            background-color: #4752C4;
+        }
+
+        /* Styles for the game link button */
+        .game-link-button {
+            position: fixed;
+            bottom: 70px; /* Adjust to be above your footer */
+            right: 20px;
+            background-color: #28a745; /* A slightly noticeable color, can be changed */
+            color: white;
+            padding: 8px 12px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 0.9em;
+            opacity: 0.7; /* Make it a bit transparent */
+            transition: opacity 0.3s, background-color 0.3s;
+            z-index: 1000; /* Ensure it's above other content except modals etc. */
+        }
+        .game-link-button:hover {
+            opacity: 1; /* Full opacity on hover */
+            background-color: #218838; /* Darken on hover */
         }
     </style>
 </head>
 <body class="dark-mode">
 <header>
-    <h1 class="site-title">SkyFall</h1>
+    <h1 class="site-title">Frostzie</h1>
 </header>
 
 <div class="announcement">
-    <h2>Website coming soon!</h2>
-    <p>Use Modrinth or GitHub for download</p>
+    <h2>Datapack IDE wiki cooming soon™</h2>
+    <p>Download Mods on modrinth!</p>
     <div class="buttons">
+        <a href="https://modrinth.com/user/Frostzie" class="button">Download mods on Modrinth</a>
         <a href="https://discord.gg/qZ885qTvkx" class="button">Join our Discord</a>
-        <a href="https://github.com/Frostzie/SkyFall" class="button">Visit GitHub</a>
+        <a href="https://github.com/Frostzie/" class="button">Visit GitHub</a>
     </div>
 </div>
 
-<footer>
-    <p>&copy; 2024 SkyFall. All rights reserved.</p>
-</footer>
+<!-- Link to your game -->
+<a href="Minigames\main.html" class="game-link-button">Play Game</a>
 </body>
 </html>
